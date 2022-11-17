@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+</head>
+<body>
+    <h1>STOPWATCH</h1>
+    <div>
+        <p>
+            <span id="hour">00</span> : 
+            <span id="min">00</span> : 
+            <span id="sec">00</span>
+        </p>
+        
+        <button id="start" onclick="start()">Start</button>
+        <button id="stop" onclick="stop()">Stop</button>
+        <button id='reset' onclick="reset()">Reset</button>
+    </div>
+    <script>
+        const hour = document.getElementById('hour')
+        const min = document.getElementById('min')
+        const sec = document.getElementById('sec')
+
+        const startb = document.getElementById('start')
+        const stopb = document.getElementById('stop')
+        const resetb = document.getElementById('reset')
+        stopb.disabled = true;
+        resetb.disabled = true
+
+
+        function changeValue(){
+            hour.innerHTML = date.getHours()<10 ? "0" + date.getHours() : date.getHours()
+            min.innerHTML = date.getMinutes()<10 ? "0" + date.getMinutes() : date.getMinutes()
+            sec.innerHTML = date.getSeconds()<10 ? "0" + date.getSeconds() : date.getSeconds()
+        }
+
+        let secs = 0, mins = 0, hrs = 0;
+        let interval
+
+        let started = false;
+
+        
+        function start(){
+            // if(started)return;
+            // started = true;
+            startb.disabled = true;
+            stopb.disabled = false;
+            resetb.disabled = false;
+            interval = setInterval(startTimer, 1000)
+        }
+
+        function stop(){
+            stopb.disabled = true;
+            startb.disabled = false;
+            clearInterval(interval)
+        }
+
+        function reset(){
+            resetb.disabled = true
+            clearInterval(interval)
+            secs = 0, mins = 0, hrs = 0;
+            hour.innerHTML = "00";
+            min.innerHTML = "00"
+            sec.innerHTML = "00"
+            // changeValue()
+            h
+        }
+
+
+
+        function startTimer(){
+            secs++;
+            if(secs<=9){
+                sec.innerHTML = "0" + secs;
+            }else{
+                sec.innerHTML = secs;
+            }
+            if(secs>=60){
+                mins++;
+                min.innerHTML = "0" + mins
+                secs = 0;
+                sec.innerHTML = "0" + 0
+            }
+            if(mins>9){
+                min.innerHTML = mins;
+            }
+            if(mins >=60){
+                hrs++;
+                hour.innerHTML = "0" + hrs
+                mins = 0;
+                min.innerHTML = "0" + 0
+            }
+            if(hrs>9){
+                hour.innerHTML = hrs
+            }
+        }
+    </script>
+</body>
+</html>

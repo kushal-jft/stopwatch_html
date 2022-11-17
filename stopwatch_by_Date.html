@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+</head>
+<body>
+    <h1>STOPWATCH</h1>
+    <div>
+        <p>
+            <span id="hour">00</span> : 
+            <span id="min">00</span> : 
+            <span id="sec">00</span>
+        </p>
+        
+        <button id="start" onclick="start()">Start</button>
+        <button id="stop" onclick="stop()">Stop</button>
+        <button id='reset' onclick="reset()">Reset</button>
+    </div>
+    <script>
+        const hour = document.getElementById('hour')
+        const min = document.getElementById('min')
+        const sec = document.getElementById('sec')
+
+        const startb = document.getElementById('start')
+        const stopb = document.getElementById('stop')
+        const resetb = document.getElementById('reset')
+        stopb.disabled = true;
+        resetb.disabled = true
+
+
+        function changeValue(){
+            hour.innerHTML = date.getHours()<10 ? "0" + date.getHours() : date.getHours()
+            min.innerHTML = date.getMinutes()<10 ? "0" + date.getMinutes() : date.getMinutes()
+            sec.innerHTML = date.getSeconds()<10 ? "0" + date.getSeconds() : date.getSeconds()
+        }
+
+        let date = new Date()
+        let interval
+        date.setHours(0,0,0,0);
+        let started = false;
+        function start(){
+            // if(started)return;
+            // started = true;
+            startb.disabled = true;
+            stopb.disabled = false;
+            resetb.disabled = false;
+            interval = setInterval(function(){
+                date.setSeconds(date.getSeconds()+1)
+                changeValue()
+            }, 1000)
+        }
+
+        function stop(){
+            stopb.disabled = true;
+            startb.disabled = false;
+            clearInterval(interval)
+        }
+
+        function reset(){
+            resetb.disabled = true
+            clearInterval(interval)
+            date.setHours(0,0,0,0);
+            changeValue()
+        }
+    </script>
+</body>
+</html>
